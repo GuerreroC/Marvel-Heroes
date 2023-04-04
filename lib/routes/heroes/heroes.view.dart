@@ -34,7 +34,7 @@ class HeroesScreenView extends StatelessView<HeroesViewModel> {
           backgroundColor: backgroundColor,
         ),
         body: const Center(
-          child: Text('TEST'),
+          child: Text('TEST', style: TextStyle(color: white)),
         ));
   }
 }
