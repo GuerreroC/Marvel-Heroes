@@ -1,0 +1,47 @@
+name: dacodes
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  ################ UI/UX UTILITIES ################
+  #iOS Default
+  cupertino_icons: ^1.0.2
+
+  #Awesome Icons
+  font_awesome_flutter: ^10.4.0
+
+  #Auto Sizing Text
+  auto_size_text: ^3.0.0
+
+  ################ STATE UTILITIES ################
+  #Provider
+  provider: ^6.0.5
+
+  #PMVVM
+  pmvvm: ^4.0.1
+
+  ############### BACKEND UTILITIES ###############
+
+  #intl
+  intl: ^0.17.0
+  intl_utils: ^2.8.2
+
+  #http
+  http: ^0.13.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
