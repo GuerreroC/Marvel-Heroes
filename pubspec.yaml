@@ -31,12 +31,16 @@ dependencies:
 
   ############### BACKEND UTILITIES ###############
 
+  #http
+  http: ^0.13.5
+
+  #crypto
+  crypto: ^3.0.2
+
   #intl
   intl: ^0.17.0
   intl_utils: ^2.8.2
 
-  #http
-  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
