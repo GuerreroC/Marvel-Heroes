@@ -409,11 +409,11 @@ class Events {
 class Thumbnail {
   Thumbnail({
     this.path,
-    this.extension,
+    this.ext,
   });
 
   String? path;
-  String? extension;
+  String? ext;
 
   factory Thumbnail.fromRawJson(String str) =>
       Thumbnail.fromJson(json.decode(str));
@@ -422,12 +422,12 @@ class Thumbnail {
 
   factory Thumbnail.fromJson(Map<String, dynamic> json) => Thumbnail(
         path: json["path"],
-        extension: json["extension"],
+        ext: json["extension"],
       );
 
   Map<String, dynamic> toJson() => {
         "path": path,
-        "extension": extension,
+        "extension": ext,
       };
 }
 

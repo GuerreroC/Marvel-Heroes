@@ -2,8 +2,8 @@ import 'package:dacodes/common/colors.dart';
 import 'package:dacodes/common/size_screen.dart';
 import 'package:dacodes/provider/data.provider.dart';
 import 'package:dacodes/routes/heroes/heroes.vm.dart';
+import 'package:dacodes/widgets/hero.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pmvvm/pmvvm.dart';
 
 class HeroesScreen extends StatelessWidget {
@@ -28,13 +28,31 @@ class HeroesScreenView extends StatelessView<HeroesViewModel> {
   Widget render(BuildContext context, HeroesViewModel viewModel) {
     return Scaffold(
         backgroundColor: backgroundColor,
-        appBar: AppBar(
-          toolbarHeight: SizeScreen.height(8),
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-          backgroundColor: backgroundColor,
-        ),
-        body: const Center(
-          child: Text('TEST', style: TextStyle(color: white)),
-        ));
+        body: (viewModel.heroesList.isEmpty)
+            ? const Center(child: CircularProgressIndicator())
+            : Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: SizeScreen.width(5),
+                    vertical: SizeScreen.height(10)),
+                child: CustomScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  slivers: [
+                    SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            // childAspectRatio: 0.5,
+                            mainAxisSpacing: SizeScreen.height(1),
+                            crossAxisSpacing: SizeScreen.width(2)),
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            return HeroeWidget(
+                                heroe: viewModel.heroesList[index]);
+                          },
+                          childCount: viewModel.heroesList.length,
+                        ))
+                  ],
+                ),
+              ));
   }
 }

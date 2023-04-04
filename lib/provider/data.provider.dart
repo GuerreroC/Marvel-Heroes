@@ -11,21 +11,29 @@ class SuperHeroProvider extends ChangeNotifier {
   SuperHeroProvider._();
   static final instance = SuperHeroProvider._();
 
-  Future<List<Heroe>> getHeroesList() async {
-    String timeStamp = await getTimeStamp();
-    String dataKey =
-        "$timeStamp${marvelAPIData['private']}${marvelAPIData['public']}";
-    Digest md5Hash = md5.convert(utf8.encode(dataKey));
+  static List<Heroe> heroesList = [];
 
-    final Uri url = Uri.parse(
-        "${marvelAPIData['url']}characters?apikey=${marvelAPIData['public']}&hash=$md5Hash&ts=$timeStamp");
-    final apiResp = await http.get(url);
-    MarvelData marvelData = MarvelData.fromRawJson(apiResp.body);
-    List<Heroe>? heroesList = marvelData.data?.results;
-    inspect(heroesList);
-    print(marvelData.data?.total);
-    if (marvelData.code == 200 && marvelData.status == 'Ok') {
-      return heroesList!;
+  init() async {
+    heroesList = await getHeroesList();
+  }
+
+  Future<List<Heroe>> getHeroesList() async {
+    if (await checkInternetConnection()) {
+      String timeStamp = await getTimeStamp();
+      String dataKey =
+          "$timeStamp${marvelAPIData['private']}${marvelAPIData['public']}";
+      Digest md5Hash = md5.convert(utf8.encode(dataKey));
+      final Uri url = Uri.parse(
+          "${marvelAPIData['url']}characters?apikey=${marvelAPIData['public']}&hash=$md5Hash&ts=$timeStamp");
+      final apiResp = await http.get(url);
+      MarvelData marvelData = MarvelData.fromRawJson(apiResp.body);
+      List<Heroe>? heroesList = marvelData.data?.results;
+      if (marvelData.code == 200 && marvelData.status == 'Ok') {
+        notifyListeners();
+        return heroesList!;
+      } else {
+        return [];
+      }
     } else {
       return [];
     }

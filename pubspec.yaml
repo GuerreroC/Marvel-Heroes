@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
   ################ UI/UX UTILITIES ################
+
   #iOS Default
   cupertino_icons: ^1.0.2
 
@@ -22,7 +23,11 @@ dependencies:
   #Auto Sizing Text
   auto_size_text: ^3.0.0
 
+  #Cached Image
+  cached_network_image: ^3.2.3
+
   ################ STATE UTILITIES ################
+
   #Provider
   provider: ^6.0.5
 
