@@ -10,9 +10,12 @@ class HeroesViewModel extends ViewModel {
   @override
   void init() async {
     SizeScreen.init(MediaQuery.of(context));
-    // SuperHeroProvider.instance.init();
     heroesList = await SuperHeroProvider.instance
         .getHeroesList()
         .whenComplete(() => notifyListeners());
+  }
+
+  void openHeroeDetails(Heroe heroe) {
+    Navigator.of(context).pushNamed('/heroe_description', arguments: heroe);
   }
 }

@@ -11,12 +11,6 @@ class SuperHeroProvider extends ChangeNotifier {
   SuperHeroProvider._();
   static final instance = SuperHeroProvider._();
 
-  static List<Heroe> heroesList = [];
-
-  init() async {
-    heroesList = await getHeroesList();
-  }
-
   Future<List<Heroe>> getHeroesList() async {
     if (await checkInternetConnection()) {
       String timeStamp = await getTimeStamp();

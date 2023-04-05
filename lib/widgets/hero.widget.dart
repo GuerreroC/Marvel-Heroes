@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dacodes/common/colors.dart';
 import 'package:dacodes/common/size_screen.dart';
@@ -6,26 +7,42 @@ import 'package:flutter/material.dart';
 
 class HeroeWidget extends StatelessWidget {
   final Heroe heroe;
-  const HeroeWidget({super.key, required this.heroe});
+  final void Function()? onTap;
+  const HeroeWidget({super.key, required this.heroe, required this.onTap});
   @override
   Widget build(BuildContext context) {
-    String cachedImg =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkz6A6HBm_SPHCfoRPzLnKKDIiiHvK2_MUhg&usqp=CAU';
-    return Container(
-      // height: SizeScreen.height(30),
-      // width: SizeScreen.width(30),
-      color: greyDark,
-      child: Column(
-        children: [
-          CachedNetworkImage(
-              imageUrl: "${heroe.thumbnail?.path}.${heroe.thumbnail?.ext}",
-              fit: BoxFit.contain,
-              placeholder: (context, _) =>
-                  const Center(child: CircularProgressIndicator())),
-          // Center(
-          //   child: Text(heroe.name ?? 'Loading'),
-          // ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: dark,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: CachedNetworkImage(
+                  imageUrl: "${heroe.thumbnail?.path}.${heroe.thumbnail?.ext}",
+                  height: SizeScreen.height(20),
+                  width: SizeScreen.width(45),
+                  alignment: Alignment.topCenter,
+                  fit: BoxFit.fitWidth,
+                  placeholder: (context, _) =>
+                      const Center(child: CircularProgressIndicator())),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: SizeScreen.height(2)),
+              child: Center(
+                child: SizedBox(
+                  height: SizeScreen.height(2),
+                  child: AutoSizeText(heroe.name ?? 'Loading',
+                      style: const TextStyle(color: white)),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

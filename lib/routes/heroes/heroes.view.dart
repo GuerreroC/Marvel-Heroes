@@ -41,13 +41,15 @@ class HeroesScreenView extends StatelessView<HeroesViewModel> {
                     SliverGrid(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            // childAspectRatio: 0.5,
+                            childAspectRatio: 0.8,
                             mainAxisSpacing: SizeScreen.height(1),
                             crossAxisSpacing: SizeScreen.width(2)),
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
                             return HeroeWidget(
-                                heroe: viewModel.heroesList[index]);
+                                heroe: viewModel.heroesList[index],
+                                onTap: () => viewModel.openHeroeDetails(
+                                    viewModel.heroesList[index]));
                           },
                           childCount: viewModel.heroesList.length,
                         ))

@@ -1,4 +1,5 @@
 import 'package:dacodes/routes/heroes/heroes.view.dart';
+import 'package:dacodes/routes/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,13 +19,10 @@ class MainApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-    return const MaterialApp(
+    return MaterialApp(
       //Debug banner
       debugShowCheckedModeBanner: kDebugMode,
-
-      //Due that this Test App is Single-Page app
-      //the routes are not implemented
-      home: HeroesScreen(),
+      routes: appRoutes,
     );
   }
 }
