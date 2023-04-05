@@ -42,6 +42,7 @@ class HeroesScreenView extends StatelessView<HeroesViewModel> {
                     height: SizeScreen.height(85),
                     child: CustomScrollView(
                       physics: const ClampingScrollPhysics(),
+                      controller: viewModel.scrollController,
                       shrinkWrap: true,
                       slivers: [
                         SliverGrid(
@@ -59,7 +60,14 @@ class HeroesScreenView extends StatelessView<HeroesViewModel> {
                                         viewModel.heroesList[index]));
                               },
                               childCount: viewModel.heroesList.length,
-                            ))
+                            )),
+                        SliverToBoxAdapter(
+                            child: (viewModel.isLoadingMoreHeroes)
+                                ? SizedBox(
+                                    height: SizeScreen.height(10),
+                                    child: const Center(
+                                        child: CircularProgressIndicator()))
+                                : const SizedBox.shrink())
                       ],
                     ),
                   ),

@@ -12,14 +12,14 @@ class SuperHeroProvider extends ChangeNotifier {
 
   static String? copyright;
 
-  Future<List<Heroe>> getHeroesList() async {
+  Future<List<Heroe>> getHeroesList(int offset) async {
     if (await checkInternetConnection()) {
       String timeStamp = await getTimeStamp();
       String dataKey =
           "$timeStamp${marvelAPIData['private']}${marvelAPIData['public']}";
       Digest md5Hash = md5.convert(utf8.encode(dataKey));
       final Uri url = Uri.parse(
-          "${marvelAPIData['url']}characters?apikey=${marvelAPIData['public']}&hash=$md5Hash&ts=$timeStamp");
+          "${marvelAPIData['url']}characters?apikey=${marvelAPIData['public']}&hash=$md5Hash&ts=$timeStamp&offset=$offset");
       final apiResp = await http.get(url);
       MarvelData marvelData = MarvelData.fromRawJson(apiResp.body);
       copyright = marvelData.attributionText;
