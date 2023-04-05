@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dacodes/common/colors.dart';
 import 'package:dacodes/common/size_screen.dart';
 import 'package:dacodes/provider/data.provider.dart';
@@ -30,31 +31,41 @@ class HeroesScreenView extends StatelessView<HeroesViewModel> {
         backgroundColor: backgroundColor,
         body: (viewModel.heroesList.isEmpty)
             ? const Center(child: CircularProgressIndicator())
-            : Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: SizeScreen.width(5),
-                    vertical: SizeScreen.height(10)),
-                child: CustomScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  slivers: [
-                    SliverGrid(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.8,
-                            mainAxisSpacing: SizeScreen.height(1),
-                            crossAxisSpacing: SizeScreen.width(2)),
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            return HeroeWidget(
-                                heroe: viewModel.heroesList[index],
-                                onTap: () => viewModel.openHeroeDetails(
-                                    viewModel.heroesList[index]));
-                          },
-                          childCount: viewModel.heroesList.length,
-                        ))
-                  ],
-                ),
+            : Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(
+                        SizeScreen.width(5),
+                        SizeScreen.height(8),
+                        SizeScreen.width(5),
+                        SizeScreen.height(2)),
+                    height: SizeScreen.height(85),
+                    child: CustomScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      slivers: [
+                        SliverGrid(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.8,
+                                    mainAxisSpacing: SizeScreen.height(1),
+                                    crossAxisSpacing: SizeScreen.width(2)),
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                return HeroeWidget(
+                                    heroe: viewModel.heroesList[index],
+                                    onTap: () => viewModel.openHeroeDetails(
+                                        viewModel.heroesList[index]));
+                              },
+                              childCount: viewModel.heroesList.length,
+                            ))
+                      ],
+                    ),
+                  ),
+                  AutoSizeText(viewModel.copyright ?? 'Loading',
+                      style: appStyle)
+                ],
               ));
   }
 }

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'dart:convert';
@@ -11,6 +10,8 @@ class SuperHeroProvider extends ChangeNotifier {
   SuperHeroProvider._();
   static final instance = SuperHeroProvider._();
 
+  static String? copyright;
+
   Future<List<Heroe>> getHeroesList() async {
     if (await checkInternetConnection()) {
       String timeStamp = await getTimeStamp();
@@ -21,6 +22,7 @@ class SuperHeroProvider extends ChangeNotifier {
           "${marvelAPIData['url']}characters?apikey=${marvelAPIData['public']}&hash=$md5Hash&ts=$timeStamp");
       final apiResp = await http.get(url);
       MarvelData marvelData = MarvelData.fromRawJson(apiResp.body);
+      copyright = marvelData.attributionText;
       List<Heroe>? heroesList = marvelData.data?.results;
       if (marvelData.code == 200 && marvelData.status == 'Ok') {
         notifyListeners();

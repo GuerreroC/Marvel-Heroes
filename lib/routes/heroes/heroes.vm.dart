@@ -6,13 +6,16 @@ import 'package:pmvvm/pmvvm.dart';
 
 class HeroesViewModel extends ViewModel {
   List<Heroe> heroesList = [];
+  String? copyright = '';
 
   @override
   void init() async {
     SizeScreen.init(MediaQuery.of(context));
-    heroesList = await SuperHeroProvider.instance
-        .getHeroesList()
-        .whenComplete(() => notifyListeners());
+    heroesList =
+        await SuperHeroProvider.instance.getHeroesList().whenComplete(() {
+      copyright = SuperHeroProvider.copyright;
+      notifyListeners();
+    });
   }
 
   void openHeroeDetails(Heroe heroe) {

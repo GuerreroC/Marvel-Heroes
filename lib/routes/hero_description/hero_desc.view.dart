@@ -111,16 +111,20 @@ class HeroeDescription extends StatelessWidget {
               children: [
                 ButtonWidget(
                     title: 'Comics',
-                    data: '${viewModel.heroe.comics?.available}'),
+                    data: '${viewModel.heroe.comics?.available}',
+                    onPressed: () => viewModel.openHeroeList(ItemType.comics)),
                 ButtonWidget(
                     title: 'Series',
-                    data: '${viewModel.heroe.series?.available}'),
+                    data: '${viewModel.heroe.series?.available}',
+                    onPressed: () => viewModel.openHeroeList(ItemType.series)),
                 ButtonWidget(
                     title: 'Stories',
-                    data: '${viewModel.heroe.stories?.available}'),
+                    data: '${viewModel.heroe.stories?.available}',
+                    onPressed: () => viewModel.openHeroeList(ItemType.stories)),
                 ButtonWidget(
                     title: 'Events',
-                    data: '${viewModel.heroe.events?.available}'),
+                    data: '${viewModel.heroe.events?.available}',
+                    onPressed: () => viewModel.openHeroeList(ItemType.events)),
               ],
             ),
           )
